@@ -1,17 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Berita Olahraga Nasional</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
-  <meta property="og:title" content="Berita Olahraga Terkini" />
-  <meta property="og:description" content="Update berita olahraga nasional dan internasional terbaru" />
-  <meta property="og:image" content="thumbnail.jpg" />
-  <meta property="og:url" content="https://www.beritaolahraga.com" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
   <header>
     <h1>Berita Olahraga</h1>
     <nav>
@@ -26,24 +22,32 @@
   </header>
 
   <main>
-    <article class="berita">
-      <img src="gambar-berita.jpg" alt="Gambar Berita" />
-      <h2>Judul Berita Olahraga</h2>
-      <p class="tanggal">6 Mei 2025</p>
-      <p class="isi-berita">
-        Ini adalah konten berita olahraga. Anda bisa mengedit bagian ini untuk memasukkan berita terbaru.
-      </p>
-      <div class="share">
-        <span>Bagikan: </span>
-        <a href="#" onclick="shareTo('whatsapp')">WhatsApp</a>
-        <a href="#" onclick="shareTo('facebook')">Facebook</a>
-        <a href="https://www.youtube.com/@beritaolahraga" target="_blank">YouTube</a>
-      </div>
-    </article>
+    <section class="berita">
+      <h2>Daftar Berita Terbaru</h2>
+      <ul id="artikel-list">
+        <!-- Artikel akan ditampilkan di sini -->
+      </ul>
+    </section>
   </main>
 
   <footer>
     <p>&copy; 2025 Berita Olahraga. Semua Hak Dilindungi.</p>
   </footer>
+
+  <script>
+    // Fungsi untuk mengambil data artikel dari file JSON dan menampilkannya
+    fetch('artikels.json')
+      .then(response => response.json())
+      .then(data => {
+        const artikelList = document.getElementById('artikel-list');
+        data.forEach(artikel => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="${artikel.link}">${artikel.judul}</a> <span>(${artikel.tanggal})</span>`;
+          artikelList.appendChild(li);
+        });
+      })
+      .catch(error => console.error('Error:', error));
+  </script>
+
 </body>
 </html>
